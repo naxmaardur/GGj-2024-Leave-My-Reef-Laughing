@@ -5,14 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class FishMover : MonoBehaviour
 {
-    InputActionList inputActions;
-
-    Vector2 movementInput;
-
-    bool PickUpPressed;
-    Coroutine PickUpPressWindow;
-    bool UsePressed;
-    Coroutine UsePressWindow;
     Rigidbody2D rb2;
     private float maxVelocity;
     [SerializeField]
@@ -24,70 +16,14 @@ public class FishMover : MonoBehaviour
 
     [SerializeField]
     private float speedMod;
-
-
-    
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
-        inputActions = new();
-
         characterYsize = characterRenderer.localScale.y;
-
-        inputActions.Player.Movement.performed += ctx =>
-        {
-            movementInput = ctx.ReadValue<Vector2>();
-
-        };
-
-        inputActions.Player.Movement.canceled += ctx =>
-        {
-            movementInput = Vector2.zero;
-        };
-
-        inputActions.Player.pickUp.performed += ctx =>
-        {
-            PickUpPressed = true;
-            PickUpPressWindow = StartCoroutine(PickUpInteractListenWindow());
-        };
-
-        inputActions.Player.pickUp.canceled += ctx =>
-        {
-            PickUpPressed = false;
-            StopCoroutine(PickUpPressWindow);
-        };
-
-
-        inputActions.Player.Use.performed += ctx =>
-        {
-            UsePressed = true;
-            UsePressWindow = StartCoroutine(PickUpInteractListenWindow());
-        };
-
-        inputActions.Player.Use.canceled += ctx =>
-        {
-            UsePressed = false;
-            StopCoroutine(UsePressWindow);
-        };
-        inputActions.Enable();
     }
 
-    private void OnDisable()
-    {
-        inputActions.Disable();
-    }
-
-    private void OnEnable()
-    {
-        if (inputActions != null)
-        {
-            inputActions.Enable();
-        }
-    }
+  
 
     // Update is called once per frame
     void Update()
@@ -96,7 +32,7 @@ public class FishMover : MonoBehaviour
         {
             maxVelocity -= Time.deltaTime * 3;
         }
-        if (movementInput == Vector2.zero && maxVelocity > 0)
+        if (PlayerInputHandler.Instance.movementInput == Vector2.zero && maxVelocity > 0)
         {
             maxVelocity -= Time.deltaTime * 12;
         }
@@ -123,10 +59,10 @@ public class FishMover : MonoBehaviour
 
     private void Rotation()
     {
-        if(movementInput == Vector2.zero) { return; }
+        if(PlayerInputHandler.Instance.movementInput == Vector2.zero) { return; }
 
         //characterRenderer.forward = Vector2.Lerp(characterRenderer.forward, movementInput, 0.3f);
-        float angle = Mathf.Atan2(movementInput.y, -movementInput.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(PlayerInputHandler.Instance.movementInput.y, -PlayerInputHandler.Instance.movementInput.x) * Mathf.Rad2Deg;
         Quaternion newRot = Quaternion.Euler(new Vector3(0, 0, -angle));
         Debug.Log(angle);
         characterRenderer.rotation = Quaternion.Lerp(characterRenderer.rotation, newRot,0.2f);
@@ -147,9 +83,9 @@ public class FishMover : MonoBehaviour
 
     private void HandelMovement()
     {
-        if (movementInput == Vector2.zero) { return; }
+        if (PlayerInputHandler.Instance.movementInput == Vector2.zero) { return; }
 
-        rb2.velocity += movementInput * Time.fixedDeltaTime * speedMod / rb2.mass;
+        rb2.velocity += PlayerInputHandler.Instance.movementInput * Time.fixedDeltaTime * speedMod / rb2.mass;
 
     }
     private void VelocityClamping()
@@ -162,9 +98,5 @@ public class FishMover : MonoBehaviour
         rb2.velocity = v;
     }
 
-    IEnumerator PickUpInteractListenWindow()
-    {
-        yield return new WaitForSeconds(0.4f);
-        PickUpPressed = false;
-    }
+    
 }
