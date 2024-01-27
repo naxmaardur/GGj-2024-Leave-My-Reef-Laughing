@@ -45,11 +45,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
+        if(currentState == STATES.Dead)
+        {
+            return;
+        }
         if (currentOxygen <= 0)
         {
             //go to the upmost top
             currentState = STATES.Dead;
             agent.SetDestination(GameManager.Instance.NpcDeathPoint);
+            return;
         }
 
         if(!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime)
@@ -183,6 +188,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void TryAddFunny(float f)
     {
+        if (currentState == STATES.Dead)
+        {
+            return;
+        }
         currentOxygen -= f;
         StartCoroutine(PauseForTime(1));
     }
