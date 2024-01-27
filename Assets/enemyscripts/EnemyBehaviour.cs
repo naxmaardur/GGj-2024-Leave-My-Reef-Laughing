@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float radius = 5f;
     [SerializeField] private float calmSpeed = 0.01f;
 
+
     private float currentOxygen = 100f;
     private float maxOxygen = 100f;
 
@@ -30,7 +31,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
-        print(Vector3.Angle(transform.position, new Vector3(0,0,0)));
         if (currentOxygen <= 0)
         {
             //go to the upmost top
@@ -85,16 +85,18 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void TryAddFunny(float f)
     {
-        throw new System.NotImplementedException();
+        currentOxygen -= f;
     }
 
     public void TrySeeFunny(float f, Vector3 position)
     {
         throw new System.NotImplementedException();
-        if (Vector3.Angle(transform.right, position) > 10)
+        /*
+        if (invisioncone)
         {
-            
+            TryAddFunny(f);
         }
+        */
     }
 
     void Movement()
@@ -139,4 +141,6 @@ public class EnemyBehaviour : MonoBehaviour
 
         }
     }
+
+
 }
