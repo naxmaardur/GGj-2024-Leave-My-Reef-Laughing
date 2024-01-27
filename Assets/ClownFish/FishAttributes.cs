@@ -9,6 +9,16 @@ public class FishAttributes : MonoBehaviour
     [Tag,SerializeField]
     private string tunnelTag;
 
+    [SerializeField] private int playerHealth = 3;
+    [SerializeField] private ParticleSystem DamageParticles;
+
+    [Button]
+    public void takeDamage()
+    {
+        playerHealth -= 1;
+        if (playerHealth <= 0) { GameManager.Instance.GameOver(); }
+        DamageParticles.Play();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == tunnelTag)
