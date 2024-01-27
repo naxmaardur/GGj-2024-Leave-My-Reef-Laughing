@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
-public class FeatherObject : MonoBehaviour, IPickUpAble
+public class PickUpObject : MonoBehaviour, IPickUpAble
 {
     public GameObject Gameobject { get; set; }
     public Transform FollowPoint { get; set; }
@@ -10,7 +10,10 @@ public class FeatherObject : MonoBehaviour, IPickUpAble
     bool placable = false;
     [SerializeField]
     GameObject Highlight;
+    [SerializeField]
+    bool usedInEffect;
     Rigidbody2D rb;
+
 
     [SerializeReference] InteractionEffect[] effects;
 
@@ -21,7 +24,7 @@ public class FeatherObject : MonoBehaviour, IPickUpAble
     }
     void FixedUpdate()
     {
-        if(FollowPoint != null)
+        if (FollowPoint != null)
         {
             transform.position = FollowPoint.position;
         }
@@ -65,9 +68,9 @@ public class FeatherObject : MonoBehaviour, IPickUpAble
 
     public bool CheckInteractionCompatibility(Interactable interactable)
     {
-        foreach(InteractionEffect interactionEffect in effects)
+        foreach (InteractionEffect interactionEffect in effects)
         {
-            if(interactionEffect == interactable.InteractionEffect)
+            if (interactionEffect == interactable.InteractionEffect)
             {
                 return true;
             }
@@ -77,6 +80,6 @@ public class FeatherObject : MonoBehaviour, IPickUpAble
 
     public bool UsedInEffects()
     {
-        return true;
+        return usedInEffect;
     }
 }
