@@ -24,7 +24,7 @@ public class FishAttributes : MonoBehaviour
         if (playerHealth <= 0) { GameManager.Instance.GameOver(); }
         DamageParticles.Play();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == tunnelTag)
         {

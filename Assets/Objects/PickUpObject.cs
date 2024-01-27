@@ -19,8 +19,8 @@ public class PickUpObject : MonoBehaviour, IPickUpAble
     private TrapScript trapPrefab;
     Rigidbody2D rb;
 
-    [Expandable]
-    [SerializeReference] InteractionEffect[] effects;
+    [SerializeReference, Expandable] 
+    InteractionEffect[] effects;
 
     void Start()
     {

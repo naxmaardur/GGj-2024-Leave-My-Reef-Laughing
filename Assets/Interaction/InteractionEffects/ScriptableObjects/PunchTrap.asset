@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c7e809c081b7648afb0c6a29d5ee75, type: 3}
-  m_Name: Squidward
+  m_Name: PunchTrap
   m_EditorClassIdentifier: 
-  effectDuration: 0
+  effectDuration: 2.67
   funnyValue: 0
-  range: 0
+  range: 10
   effectVisuals: {fileID: 0}
-  AnimationTrigger: Activate
+  AnimationTrigger: Open

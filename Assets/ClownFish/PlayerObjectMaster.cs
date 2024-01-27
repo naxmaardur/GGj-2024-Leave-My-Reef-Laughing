@@ -81,6 +81,7 @@ public class PlayerObjectMaster : MonoBehaviour
             currentObject.PlaceObject();
             currentObject = null;
             PlayerInputHandler.Instance.ActionUseUsed();
+            boxCollider.enabled = false;
         }
     }
 

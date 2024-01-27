@@ -139,6 +139,7 @@ public class EnemyBehaviour : MonoBehaviour
     private void ChaseBehavior()
     {
         //go chase player
+        agent.speed = normalSpeed;
         agent.SetDestination(fishAttributes.transform.position);
 
         if(Vector3.Distance(transform.position, agent.destination) < 0.5f)
@@ -173,7 +174,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         agent.isStopped = true;
         yield return new WaitForSeconds(time);
-        agent.isStopped = true;
+        agent.isStopped = false;
     }
 
     void MoveToRoom(Room room)
