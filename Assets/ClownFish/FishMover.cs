@@ -19,12 +19,15 @@ public class FishMover : MonoBehaviour
 
     [SerializeField]
     ParticleSystem ParticleTrail;
+    [SerializeField]
+    Animator fishAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
         characterYsize = characterRenderer.localScale.y;
+        
     }
 
   
@@ -65,6 +68,12 @@ public class FishMover : MonoBehaviour
                 ParticleTrail.Stop();
             }
         }
+        fishAnimator.SetFloat("Velocity", PlayerInputHandler.Instance.movementInput.magnitude);
+
+        float playbackSpeed = Mathf.Lerp(1, 3, rb2.velocity.magnitude / maxVelocity);
+
+        fishAnimator.speed = playbackSpeed;
+
     }
 
 
