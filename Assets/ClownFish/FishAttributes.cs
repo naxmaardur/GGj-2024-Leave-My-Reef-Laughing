@@ -12,6 +12,11 @@ public class FishAttributes : MonoBehaviour
     [SerializeField] private int playerHealth = 3;
     [SerializeField] private ParticleSystem DamageParticles;
 
+    public float TimeOutsideOfTunnel { get; private set; }
+    public float chaseTime;
+    
+
+
     [Button]
     public void takeDamage()
     {
@@ -34,4 +39,17 @@ public class FishAttributes : MonoBehaviour
             isInTunnel = false;
         }
     }
+
+    private void Update()
+    {
+        if (!isInTunnel && TimeOutsideOfTunnel < chaseTime)
+        {
+            TimeOutsideOfTunnel += Time.deltaTime;
+        }
+        if(isInTunnel && TimeOutsideOfTunnel > 0)
+        {
+            TimeOutsideOfTunnel -= Time.deltaTime * 2;
+        }
+    }
+
 }

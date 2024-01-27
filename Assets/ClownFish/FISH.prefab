@@ -5202,6 +5202,7 @@ MonoBehaviour:
   tunnelTag: Tunnel
   playerHealth: 3
   DamageParticles: {fileID: 8713160036300384655}
+  chaseTime: 4
 --- !u!1 &6889640992857880617
 GameObject:
   m_ObjectHideFlags: 0

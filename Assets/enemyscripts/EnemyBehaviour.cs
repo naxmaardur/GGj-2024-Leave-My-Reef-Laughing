@@ -24,13 +24,22 @@ public class EnemyBehaviour : MonoBehaviour
     private float targetTimeChoice = 1f;
 
     private NavMeshAgent agent;
+    private FishAttributes fishAttributes;
+    private bool continueChase;
+
+    private float timerInRange = 0f;
+
+    private float targetTimeInRange = 1.5f;
+
     public  STATES currentState = STATES.idel;
+
 
 
     void Start()
     {
 		fov = GetComponentInChildren<FieldOfView>();
         agent = GetComponent<NavMeshAgent>();
+        fishAttributes = FindObjectOfType<FishAttributes>();
     }
 
     void Update()
@@ -38,9 +47,29 @@ public class EnemyBehaviour : MonoBehaviour
         if (currentOxygen <= 0)
         {
             //go to the upmost top
+            currentState = STATES.Dead;
         }
 
-        Debug.Log("Update?");
+        if(!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime)
+        {
+            continueChase = true;
+        }
+        if(continueChase && fishAttributes.TimeOutsideOfTunnel <= 0)
+        {
+            continueChase = false;
+        }
+
+        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel)
+        {
+            currentState = STATES.Chase;
+        }
+        if(currentState == STATES.Chase && fishAttributes.isInTunnel)
+        {
+            StartMoveToRoom();
+            currentState = STATES.move;
+        }
+
+
         switch (currentState)
         {
             case STATES.idel:
@@ -103,6 +132,41 @@ public class EnemyBehaviour : MonoBehaviour
     private void ChaseBehavior()
     {
         //go chase player
+        agent.SetDestination(fishAttributes.transform.position);
+
+        if(Vector3.Distance(transform.position, agent.destination) < 0.5f)
+        {
+            if(timerInRange < targetTimeInRange)
+            {
+                timerInRange += Time.deltaTime;
+
+                if(timerInRange >= targetTimeInRange)
+                {
+                    Attack();
+                }
+            }
+        }
+        else
+        {
+            if(timerInRange > 0)
+            {
+                timerInRange -= Time.deltaTime;
+            }
+        }
+    }
+
+    void Attack()
+    {
+        timerInRange = 0;
+        fishAttributes.takeDamage();
+        StartCoroutine(PauseForTime(1));
+    }
+
+    IEnumerator PauseForTime(float time)
+    {
+        agent.isStopped = true;
+        yield return new WaitForSeconds(time);
+        agent.isStopped = true;
     }
 
     void MoveToRoom(Room room)
@@ -118,6 +182,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void TryAddFunny(float f)
     {
         currentOxygen -= f;
+        StartCoroutine(PauseForTime(1));
     }
 
     public void TrySeeFunny(float f, Vector3 position)
