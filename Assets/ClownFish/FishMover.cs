@@ -19,6 +19,7 @@ public class FishMover : MonoBehaviour
 
     [SerializeField]
     ParticleSystem ParticleTrail;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +114,4 @@ public class FishMover : MonoBehaviour
         }
         rb2.velocity = v;
     }
-
-    
 }

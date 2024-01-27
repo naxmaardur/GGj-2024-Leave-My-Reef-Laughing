@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 7418619162834299795}
   - component: {fileID: 7096932976950651967}
   - component: {fileID: 4180391568683317083}
+  - component: {fileID: 4889989601153283110}
   m_Layer: 6
   m_Name: FISH
   m_TagString: Untagged
@@ -297,6 +298,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.11299282, y: 1.1589755}
   m_EdgeRadius: 0
+--- !u!114 &4889989601153283110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169060026535532228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1ba8913fbdeb1478032f4f7fd8c46a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tunnelTag: Tunnel
 --- !u!1 &6889640992857880617
 GameObject:
   m_ObjectHideFlags: 0
