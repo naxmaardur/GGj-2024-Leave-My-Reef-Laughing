@@ -21,15 +21,15 @@ public class PlayerObjectMaster : MonoBehaviour
     [SerializeField]
     BoxCollider2D boxCollider;
 
+    FishAttributes fishAttributes;
 
 
-    // Start is called before the first frame update
+
     void Start()
     {
-
+        fishAttributes = GetComponent<FishAttributes>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckForObjects();
@@ -86,6 +86,16 @@ public class PlayerObjectMaster : MonoBehaviour
 
     private void CheckForObjects()
     {
+        if (fishAttributes.isInTunnel)
+        {
+            if (pickUpAbleTarget != null)
+            {
+                pickUpAbleTarget.ToggleHighlight(false);
+
+            }
+            pickUpAbleTarget = null;
+            return;
+        }
         Collider2D[] pickUps = Physics2D.OverlapCircleAll(pickUpPoint.position, 0.3f, pickUpLayer);
 
         Collider2D pickUp = null;

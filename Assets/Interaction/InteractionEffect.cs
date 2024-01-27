@@ -7,7 +7,6 @@ public class InteractionEffect : ScriptableObject
 {
     public float effectDuration;
     public float funnyValue;
-    public bool lineOfSightEffect;
     public float range;
     public GameObject effectVisuals;
 
