@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public UnityEvent gameOverEvent;
+    public UnityEvent diverExitEvent;
     public Vector3 NpcDeathPoint = Vector3.zero;
 
     // Start is called before the first frame update
@@ -31,6 +32,11 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Game Over");
         gameOverEvent?.Invoke();
         Time.timeScale = 0f;
+    }
+
+    public void DiverExit()
+    {
+        diverExitEvent?.Invoke();
     }
 
     public void RestartGame()
