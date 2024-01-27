@@ -32,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float targetTimeInRange = 1.5f;
 
     public  STATES currentState = STATES.idel;
+    
 
 
 
@@ -48,6 +49,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             //go to the upmost top
             currentState = STATES.Dead;
+            agent.SetDestination(GameManager.Instance.NpcDeathPoint);
         }
 
         if(!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime)

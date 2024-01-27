@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public UnityEvent gameOverEvent;
+    public Vector3 NpcDeathPoint = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,13 @@ public class GameManager : Singleton<GameManager>
     public void StopACoroutine(Coroutine coroutine)
     {
         StopCoroutine(coroutine);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(NpcDeathPoint, 0.2f);
     }
 
 }
