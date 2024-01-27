@@ -8,7 +8,7 @@ public class PlayerObjectMaster : MonoBehaviour
 
     IPickUpAble pickUpAbleTarget;
 
-    Iinteractable interactableTarget;
+    Interactable interactableTarget;
 
     [SerializeField]
     Transform pickUpPoint;
@@ -68,7 +68,7 @@ public class PlayerObjectMaster : MonoBehaviour
         if ((interactableTarget != null && !currentObject.IsPlacable()))
         {
             if (!interactableTarget.IsInteractable()) { return; }
-            interactableTarget.UseInteraction(currentObject);
+            currentObject.UseInteraction(interactableTarget);
             PlayerInputHandler.Instance.ActionUseUsed();
         }
         if (currentObject.IsPlacable())
@@ -98,7 +98,7 @@ public class PlayerObjectMaster : MonoBehaviour
         if (pickUp != null)
         {
             IPickUpAble iPickUp = pickUp.GetComponent<IPickUpAble>();
-            if (pickUpAbleTarget != iPickUp)
+            if (pickUpAbleTarget != iPickUp && pickUpAbleTarget != null)
             {
                 pickUpAbleTarget.ToggleHighlight(false);
             }
@@ -109,7 +109,7 @@ public class PlayerObjectMaster : MonoBehaviour
         {
             if (pickUpAbleTarget != null)
             {
-                pickUpAbleTarget.ToggleHighlight(true);
+                pickUpAbleTarget.ToggleHighlight(false);
 
             }
             pickUpAbleTarget = null;
@@ -135,13 +135,13 @@ public class PlayerObjectMaster : MonoBehaviour
 
         if (interactable != null)
         {
-            Iinteractable iInteractable = interactable.GetComponent<Iinteractable>();
-            if (interactableTarget != iInteractable)
+            Interactable iInteractable = interactable.GetComponent<Interactable>();
+            if (interactableTarget != iInteractable && interactableTarget != null)
             {
                 interactableTarget.ToggleHighlight(false);
             }
             interactableTarget = iInteractable;
-            if (currentObject != null && !currentObject.IsPlacable())
+            if (currentObject != null && !currentObject.IsPlacable() && currentObject.CheckInteractionCompatibility(interactableTarget))
             {
                 interactableTarget.ToggleHighlight(true);
             }
@@ -150,7 +150,7 @@ public class PlayerObjectMaster : MonoBehaviour
         {
             if (interactableTarget != null)
             {
-                interactableTarget.ToggleHighlight(true);
+                interactableTarget.ToggleHighlight(false);
             }
             interactableTarget = null;
         }
