@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03733f7af5739af48853c353783a56e9, type: 3}
-  m_Name: Testeffect
+  m_Script: {fileID: 11500000, guid: 85c7e809c081b7648afb0c6a29d5ee75, type: 3}
+  m_Name: Trap
   m_EditorClassIdentifier: 
-  effectDuration: 3
+  effectDuration: 0
   funnyValue: 10
-  range: 10
+  range: 5
   effectVisuals: {fileID: 0}
+  AnimationTrigger: 

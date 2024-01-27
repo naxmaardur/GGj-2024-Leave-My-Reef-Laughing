@@ -32,7 +32,9 @@ public class InteractionEffect : ScriptableObject
         {
             if(collider.transform == interactable.transform.parent) { continue; }
             EnemyBehaviour npcControler = collider.GetComponent<EnemyBehaviour>();
-            npcControler.TrySeeFunny(funnyValue,interactable.transform.position);
+            float a = funnyValue;
+            Interactable inter = interactable;
+            npcControler.TrySeeFunny(funnyValue, interactable.transform.position);
         }
     }
 
