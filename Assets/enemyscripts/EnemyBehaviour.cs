@@ -12,6 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Room currentroom;
     [SerializeField] private float radius = 5f;
     [SerializeField] private float calmSpeed = 0.01f;
+    [SerializeField] private float normalSpeed = 3.5f;
 
 
     private float currentOxygen = 100f;
@@ -21,11 +22,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private float targetTimeChoice = 1f;
 
-    private bool chasing = false;
-
-    private bool moving = false;
-
     private NavMeshAgent agent;
+    public  STATES currentState = STATES.idel;
 
 
     void Start()
@@ -39,53 +37,81 @@ public class EnemyBehaviour : MonoBehaviour
         {
             //go to the upmost top
         }
-        
-        //condition to start chasing
 
-        if (!chasing)
+        Debug.Log("Update?");
+        switch (currentState)
         {
-            timerChoice += Time.deltaTime;
+            case STATES.idel:
+                IdelBehavior();
+                break;
+            case STATES.move:
+                MoveBehavior();
+                break;
+            case STATES.Chase:
+                ChaseBehavior();
+                break;
+            case STATES.Dead:
 
-            if (moving)
-                Movement();
+                break;
+            default:
+                IdelBehavior();
+                break;
+        }
+    }
 
-            if (timerChoice > targetTimeChoice)
+    private void MoveBehavior()
+    {
+        if (Vector3.Distance(transform.position, agent.destination) < 0.5f)
+        {
+            currentState = STATES.idel;
+        }
+    }
+
+    private void StartMoveToRoom()
+    {
+        int choice = Random.Range(0, 100);
+        if (choice > currentOxygen)
+        {
+            //move a room up
+            if (currentroom.topRooms.Count > 0)
             {
-                moving = false;
-                
-                int choice = Random.Range(0, 100);
-
-                if (choice > currentOxygen)
-                {
-                    //move a room up
-                    if (currentroom.topRooms.Count > 0)
-                    {
-                        MoveToRoom(currentroom.topRooms[Random.Range(0, currentroom.topRooms.Count - 1)]);
-                    }
-                }
-                else
-                {
-                    MakeADescicion(choice);
-                }
-
-                timerChoice = 0;
-                //generate a random time 
-                targetTimeChoice = Random.Range(0f, 2f);
+                MoveToRoom(currentroom.topRooms[Random.Range(0, currentroom.topRooms.Count - 1)]);
+                return;
             }
         }
-        else
+        MakeADescicion(choice);
+        timerChoice = 0;
+        //generate a random time 
+        targetTimeChoice = Random.Range(0f, 2f);
+        currentState = STATES.move;
+    }
+
+    private void IdelBehavior()
+    {
+        timerChoice += Time.deltaTime;
+        if (timerChoice > targetTimeChoice)
         {
-            //go chase player
+            StartMoveToRoom();
+            currentState = STATES.move;
+            return;
         }
+        //agent.SetDestination(transform.position);
+    }
+
+    private void ChaseBehavior()
+    {
+        //go chase player
     }
 
     void MoveToRoom(Room room)
     {
-        agent.SetDestination(room.transform.position);
+        agent.speed = normalSpeed;
+        Vector2 point = Random.insideUnitCircle * 5;
+        Vector3 worldPoint = room.transform.position + new Vector3(point.x, point.y, 0);
+
+        agent.SetDestination(worldPoint);
         currentroom = room;
     }
-
-
 
     public void TryAddFunny(float f)
     {
@@ -103,12 +129,13 @@ public class EnemyBehaviour : MonoBehaviour
         */
     }
 
-    void Movement()
+    void SlowMovement()
     {
-        if (Vector3.Distance(transform.position, currentroom.transform.position) < radius)
-        {
-            transform.position += transform.up * calmSpeed;
-        }
+        agent.speed = calmSpeed;
+        Vector2 point = Random.insideUnitCircle * 5;
+        Vector3 worldPoint = currentroom.transform.position + new Vector3(point.x, point.y, 0);
+
+        agent.SetDestination(worldPoint);
     }
 
     void MakeADescicion(int choice)
@@ -117,8 +144,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             case < 50:
                 //move in current room
-                transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-                moving = true;
+                SlowMovement();
                 break;
             case < 70:
                 //move to a side room
@@ -147,4 +173,13 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
 
+}
+
+public enum STATES
+{
+    idel,
+    move,
+    moveToRoom,
+    Chase,
+    Dead
 }
