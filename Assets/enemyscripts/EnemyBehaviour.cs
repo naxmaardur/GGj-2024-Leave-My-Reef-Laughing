@@ -122,4 +122,16 @@ public class EnemyBehaviour : MonoBehaviour
         this.transform.position = room.transform.position; //replace with better movement
         currentroom = room;
     }
+
+
+
+    public void TryAddFunny(float f)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void TrySeeFunny(float f, Vector3 position)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -31,8 +31,8 @@ public class InteractionEffect : ScriptableObject
         foreach (Collider2D collider in npcs)
         {
             if(collider.transform == interactable.transform.parent) { continue; }
-            //EnemyBehaviour npcControler = collider.GetComponent<EnemyBehaviour>();
-            //npcControler.TrySeeFunny(funnyValue,interactable.position);
+            EnemyBehaviour npcControler = collider.GetComponent<EnemyBehaviour>();
+            npcControler.TrySeeFunny(funnyValue,interactable.transform.position);
         }
     }
 

@@ -20,7 +20,7 @@ public class DirectEffect : InteractionEffect
 
     protected void AddFunnyToInteractableOwner(Interactable interactable)
     {
-        //EnemyBehaviour npcControler = interactable.GetComponentInParent<EnemyBehaviour>();
-        //npcControler.TryAddFunny(funnyValue);
+        EnemyBehaviour npcControler = interactable.GetComponentInParent<EnemyBehaviour>();
+        npcControler.TryAddFunny(funnyValue);
     }
 }
