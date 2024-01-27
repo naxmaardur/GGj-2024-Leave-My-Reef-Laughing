@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Unity.Mathematics;
+
 [RequireComponent(typeof(CircleCollider2D))]
 public class PickUpObject : MonoBehaviour, IPickUpAble
 {
@@ -13,6 +15,8 @@ public class PickUpObject : MonoBehaviour, IPickUpAble
     GameObject Highlight;
     [SerializeField]
     bool usedInEffect;
+    [SerializeField] 
+    private TrapScript trapPrefab;
     Rigidbody2D rb;
 
     [Expandable]
@@ -52,8 +56,19 @@ public class PickUpObject : MonoBehaviour, IPickUpAble
 
     public bool PlaceObject()
     {
-        LetGo();
-        throw new System.NotImplementedException();
+        if (placable)
+        {
+            TrapScript trap = Instantiate(trapPrefab, transform.position, quaternion.identity);
+            trap.PickupTrap = this;
+            LetGo();
+            this.gameObject.SetActive(false);
+            return true;
+        }
+        else
+        {
+            LetGo();
+            return false;
+        }
     }
 
     public void ToggleHighlight(bool onState)
@@ -82,5 +97,10 @@ public class PickUpObject : MonoBehaviour, IPickUpAble
     public bool UsedInEffects()
     {
         return usedInEffect;
+    }
+
+    public InteractionEffect ThisEffect()
+    {
+        return effects[0];
     }
 }
