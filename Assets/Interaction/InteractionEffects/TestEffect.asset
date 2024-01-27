@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03733f7af5739af48853c353783a56e9, type: 3}
   m_Name: TestEffect
   m_EditorClassIdentifier: 
+  EffectDuration: 1

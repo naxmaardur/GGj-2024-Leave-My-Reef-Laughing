@@ -16,6 +16,9 @@ public class FishMover : MonoBehaviour
 
     [SerializeField]
     private float speedMod;
+
+    [SerializeField]
+    ParticleSystem ParticleTrail;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +49,20 @@ public class FishMover : MonoBehaviour
         if(maxVelocity < 0)
         {
             maxVelocity = 0;
+        }
+        if(rb2.velocity.magnitude > 0.4f)
+        {
+            if (!ParticleTrail.isPlaying)
+            {
+                ParticleTrail.Play();
+            }
+        }
+        else
+        {
+            if (ParticleTrail.isPlaying)
+            {
+                ParticleTrail.Stop();
+            }
         }
     }
 
