@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public UnityEvent gameOverEvent;
+    public UnityEvent diverExitEvent;
+    public Vector3 NpcDeathPoint = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,11 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0f;
     }
 
+    public void DiverExit()
+    {
+        diverExitEvent?.Invoke();
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -46,6 +53,13 @@ public class GameManager : Singleton<GameManager>
     public void StopACoroutine(Coroutine coroutine)
     {
         StopCoroutine(coroutine);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(NpcDeathPoint, 0.2f);
     }
 
 }
