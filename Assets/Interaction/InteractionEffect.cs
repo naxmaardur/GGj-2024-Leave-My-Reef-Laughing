@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InteractionEffect", menuName = "ScriptableObjects/InteractionEffect", order = 1), System.Serializable]
@@ -26,7 +27,7 @@ public class InteractionEffect : ScriptableObject
 
     protected void AddFunnyToNPCsInRange(Interactable interactable)
     {
-        Collider2D[] npcs = Physics2D.OverlapCircleAll(interactable.transform.position, range, LayerMask.NameToLayer("NPC"));
+        Collider2D[] npcs = Physics2D.OverlapCircleAll(interactable.transform.position, range, LayerMask.GetMask("NPC"));
         foreach (Collider2D collider in npcs)
         {
             if(collider.transform == interactable.transform.parent) { continue; }

@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float radius = 5f;
     [SerializeField] private float calmSpeed = 0.01f;
 
+    private FieldOfView fov;
 
     private float currentOxygen = 100f;
     private float maxOxygen = 100f;
@@ -26,7 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Start()
     {
-        
+        fov = GetComponentInChildren<FieldOfView>();
     }
 
     void Update()
@@ -90,13 +91,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void TrySeeFunny(float f, Vector3 position)
     {
-        throw new System.NotImplementedException();
-        /*
-        if (invisioncone)
+        if ((Vector3.Distance(transform.position, position) <= fov.viewRadius) && (!Physics2D.Linecast(transform.position, position, LayerMask.GetMask("Wall"))) && (fov.CheckForObjectBetweenAngle(position)))
         {
             TryAddFunny(f);
         }
-        */
     }
 
     void Movement()
