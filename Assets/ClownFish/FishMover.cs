@@ -81,7 +81,6 @@ public class FishMover : MonoBehaviour
         //characterRenderer.forward = Vector2.Lerp(characterRenderer.forward, movementInput, 0.3f);
         float angle = Mathf.Atan2(PlayerInputHandler.Instance.movementInput.y, -PlayerInputHandler.Instance.movementInput.x) * Mathf.Rad2Deg;
         Quaternion newRot = Quaternion.Euler(new Vector3(0, 0, -angle));
-        Debug.Log(angle);
         characterRenderer.rotation = Quaternion.Lerp(characterRenderer.rotation, newRot,0.2f);
 
         if(angle > 90 || angle < -90)
