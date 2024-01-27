@@ -5019,8 +5019,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placable: 0
   Highlight: {fileID: 5619996987682046117}
+  usedInEffect: 0
   effects:
-  - {fileID: 11400000, guid: 3e2a3065a4be087448a4cc690153af2d, type: 2}
+  - {fileID: 11400000, guid: c881ef230920f8e43ad1f8972da9c91c, type: 2}
 --- !u!58 &463319357748875835
 CircleCollider2D:
   m_ObjectHideFlags: 0
