@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBehaviour : MonoBehaviour
 {
 
@@ -22,10 +24,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private bool moving = false;
 
+    private NavMeshAgent agent;
+
 
     void Start()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -119,7 +123,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void MoveToRoom(Room room)
     {
-        this.transform.position = room.transform.position; //replace with better movement
+        agent.SetDestination(room.transform.position);
         currentroom = room;
     }
 
