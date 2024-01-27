@@ -18,6 +18,9 @@ public class PlayerObjectMaster : MonoBehaviour
     [SerializeField]
     LayerMask interactableLayer;
 
+    [SerializeField]
+    BoxCollider2D boxCollider;
+
 
 
     // Start is called before the first frame update
@@ -51,6 +54,7 @@ public class PlayerObjectMaster : MonoBehaviour
             currentObject.LetGo();
             currentObject = null;
             PlayerInputHandler.Instance.ActionPickUpUsed();
+            boxCollider.enabled = false;
             return;
         }
         if (pickUpAbleTarget != null)
@@ -59,6 +63,7 @@ public class PlayerObjectMaster : MonoBehaviour
             currentObject = pickUpAbleTarget;
             currentObject.PickUp(pickUpPoint);
             PlayerInputHandler.Instance.ActionPickUpUsed();
+            boxCollider.enabled = true;
         }
     }
 
