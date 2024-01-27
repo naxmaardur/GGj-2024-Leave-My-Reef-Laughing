@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 [RequireComponent(typeof(CircleCollider2D))]
 public class PickUpObject : MonoBehaviour, IPickUpAble
 {
@@ -14,7 +15,7 @@ public class PickUpObject : MonoBehaviour, IPickUpAble
     bool usedInEffect;
     Rigidbody2D rb;
 
-
+    [Expandable]
     [SerializeReference] InteractionEffect[] effects;
 
     void Start()

@@ -5032,7 +5032,8 @@ MonoBehaviour:
   placable: 0
   Highlight: {fileID: 6746139994023084113}
   usedInEffect: 1
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 1a9a57e4d023a074591486a8e62b5f1a, type: 2}
 --- !u!1 &6746139994023084113
 GameObject:
   m_ObjectHideFlags: 0

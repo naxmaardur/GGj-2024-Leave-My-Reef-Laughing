@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class Interactable: MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Interactable: MonoBehaviour
     private float cooldownTimer;
     [SerializeField]
     private GameObject highlight;
+    [Expandable]
     public InteractionEffect InteractionEffect;
 
     private void Update()
