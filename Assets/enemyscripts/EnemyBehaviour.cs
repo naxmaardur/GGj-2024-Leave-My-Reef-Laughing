@@ -30,7 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private float timerInRange = 0f;
 
-    private float targetTimeInRange = 0.75f;
+    private float targetTimeInRange = 1f;
 
     public STATES currentState = STATES.idel;
 
