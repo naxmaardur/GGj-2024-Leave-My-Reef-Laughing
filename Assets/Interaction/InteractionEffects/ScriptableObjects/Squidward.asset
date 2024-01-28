@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Squidward
   m_EditorClassIdentifier: 
   effectDuration: 6.75
-  funnyValue: 20
+  funnyValue: 5
   range: 10
   effectVisuals: {fileID: 0}
   AnimationTrigger: Activate

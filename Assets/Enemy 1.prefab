@@ -9111,7 +9111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1120612574835572063, guid: 7a89e392ff7410b468645cdb1b64b365, type: 3}
       propertyPath: cooldown
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1120612574835572063, guid: 7a89e392ff7410b468645cdb1b64b365, type: 3}
       propertyPath: InteractionEffect
@@ -9329,7 +9329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1120612574835572063, guid: 7a89e392ff7410b468645cdb1b64b365, type: 3}
       propertyPath: cooldown
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1120612574835572063, guid: 7a89e392ff7410b468645cdb1b64b365, type: 3}
       propertyPath: InteractionEffect

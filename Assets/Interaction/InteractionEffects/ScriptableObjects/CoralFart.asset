@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoralFart
   m_EditorClassIdentifier: 
   effectDuration: 1
-  funnyValue: 10
+  funnyValue: 6
   range: 10
   effectVisuals: {fileID: 0}
   AnimationTrigger: Activate
