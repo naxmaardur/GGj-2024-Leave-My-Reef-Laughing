@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,34 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<EnemyBehaviour> wave3;
     [SerializeField] private List<EnemyBehaviour> wave4;
 
+    [SerializeField] private float spawnTimer = 3f;
+
+    private List<EnemyBehaviour> enemiesToSpawn;
+    
+    private float timer = 0;
+
+    private void Start()
+    {
+        foreach (EnemyBehaviour enemy in wave1)
+        {
+            enemiesToSpawn.Add(enemy);
+        }
+        
+        enemiesToSpawn[0].gameObject.SetActive(true);
+        enemiesToSpawn.Remove(enemiesToSpawn[0]);
+    }
+
     public void EnemyLeft()
     {
         amountOfEnemiesLeft++;
+
+        if (timer >= spawnTimer && enemiesToSpawn.Count > 0)
+        {
+            timer = 0;
+            enemiesToSpawn[0].gameObject.SetActive(true);
+            enemiesToSpawn.Remove(enemiesToSpawn[0]);
+        }
+        
         if (amountOfEnemiesLeft >= activeEnemies)
         {
             waveCount++;
@@ -26,21 +52,21 @@ public class WaveManager : MonoBehaviour
                 case 2:
                     foreach (var enemy in wave2)
                     {
-                        enemy.gameObject.SetActive(true);
+                        enemiesToSpawn.Add(enemy);
                     }
                     activeEnemies += wave2.Count;
                     break;
                 case 3: 
                     foreach (var enemy in wave3)
                     {
-                        enemy.gameObject.SetActive(true);
+                        enemiesToSpawn.Add(enemy);
                     }
                     activeEnemies += wave3.Count;
                     break;
                 case 4:
                     foreach (var enemy in wave4)
                     {
-                        enemy.gameObject.SetActive(true);
+                        enemiesToSpawn.Add(enemy);
                     }
                     activeEnemies += wave4.Count;
                     break;
