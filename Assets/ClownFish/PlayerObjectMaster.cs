@@ -35,13 +35,13 @@ public class PlayerObjectMaster : MonoBehaviour
         CheckForObjects();
         CheckForInteractables();
 
-        if (PlayerInputHandler.Instance.PickUpPressed)
-        {
-            TriggerPickUpAction();
-        }
         if (PlayerInputHandler.Instance.UsePressed)
         {
             TriggerUse();
+        }
+        if (PlayerInputHandler.Instance.PickUpPressed)
+        {
+            TriggerPickUpAction();
         }
     }
 
@@ -63,6 +63,7 @@ public class PlayerObjectMaster : MonoBehaviour
             currentObject = pickUpAbleTarget;
             currentObject.PickUp(pickUpPoint);
             PlayerInputHandler.Instance.ActionPickUpUsed();
+            PlayerInputHandler.Instance.ActionUseUsed();
             boxCollider.enabled = true;
         }
     }
