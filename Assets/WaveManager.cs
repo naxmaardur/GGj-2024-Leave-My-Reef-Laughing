@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    private int waveCount = 1;
+    private int waveCount = 0;
 
     private int amountOfEnemiesLeft = 0;
 
-    private int activeEnemies = 5;
+    private int activeEnemies = 1;
 
+    [SerializeField] private GameObject winScreen;
+
+    [SerializeField] private List<EnemyBehaviour> wave0;
     [SerializeField] private List<EnemyBehaviour> wave1;
     [SerializeField] private List<EnemyBehaviour> wave2;
     [SerializeField] private List<EnemyBehaviour> wave3;
@@ -18,37 +21,39 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private float spawnTimer = 3f;
 
-    private List<EnemyBehaviour> enemiesToSpawn;
+    private List<EnemyBehaviour> enemiesToSpawn = new List<EnemyBehaviour>();
     
     private float timer = 0;
 
-    private void Start()
+    private void Update()
     {
-        foreach (EnemyBehaviour enemy in wave1)
-        {
-            enemiesToSpawn.Add(enemy);
-        }
+        timer += Time.deltaTime;
         
-        enemiesToSpawn[0].gameObject.SetActive(true);
-        enemiesToSpawn.Remove(enemiesToSpawn[0]);
+        
+        if (timer >= spawnTimer && enemiesToSpawn.Count > 0)
+        {
+            enemiesToSpawn[0].gameObject.SetActive(true);
+            enemiesToSpawn.Remove(enemiesToSpawn[0]);
+            timer = 0;
+        }
     }
 
     public void EnemyLeft()
     {
         amountOfEnemiesLeft++;
 
-        if (timer >= spawnTimer && enemiesToSpawn.Count > 0)
-        {
-            timer = 0;
-            enemiesToSpawn[0].gameObject.SetActive(true);
-            enemiesToSpawn.Remove(enemiesToSpawn[0]);
-        }
-        
         if (amountOfEnemiesLeft >= activeEnemies)
         {
             waveCount++;
             switch (waveCount)
             {
+                case 1:
+                    foreach (var enemy in wave1)
+                    {
+                        enemiesToSpawn.Add(enemy);
+                    }
+                    activeEnemies += wave1.Count;
+                    break;
                 case 2:
                     foreach (var enemy in wave2)
                     {
@@ -69,6 +74,9 @@ public class WaveManager : MonoBehaviour
                         enemiesToSpawn.Add(enemy);
                     }
                     activeEnemies += wave4.Count;
+                    break;
+                case 5:
+                    winScreen.gameObject.SetActive(true);
                     break;
                 default:
                     break;
