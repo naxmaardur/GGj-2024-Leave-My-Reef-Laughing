@@ -35,13 +35,19 @@ public class PlayerObjectMaster : MonoBehaviour
         CheckForObjects();
         CheckForInteractables();
 
-        if (PlayerInputHandler.Instance.PickUpPressed)
+        if(fishAttributes.isInTunnel && currentObject != null)
         {
-            TriggerPickUpAction();
+            currentObject.LetGo();
+            currentObject = null;
         }
+
         if (PlayerInputHandler.Instance.UsePressed)
         {
             TriggerUse();
+        }
+        if (PlayerInputHandler.Instance.PickUpPressed)
+        {
+            TriggerPickUpAction();
         }
     }
 
@@ -63,6 +69,7 @@ public class PlayerObjectMaster : MonoBehaviour
             currentObject = pickUpAbleTarget;
             currentObject.PickUp(pickUpPoint);
             PlayerInputHandler.Instance.ActionPickUpUsed();
+            PlayerInputHandler.Instance.ActionUseUsed();
             boxCollider.enabled = true;
         }
     }
@@ -75,6 +82,9 @@ public class PlayerObjectMaster : MonoBehaviour
             if (!interactableTarget.IsInteractable()) { return; }
             currentObject.UseInteraction(interactableTarget);
             PlayerInputHandler.Instance.ActionUseUsed();
+            currentObject = null;
+            boxCollider.enabled = false;
+            return;
         }
         if (currentObject.IsPlacable())
         {

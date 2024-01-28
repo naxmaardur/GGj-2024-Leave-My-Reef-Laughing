@@ -12,6 +12,25 @@ public class TrapScript : MonoBehaviour
 
     private bool checkForEnemy = true;
 
+    [SerializeField]
+    private float startdelay;
+
+    [SerializeField]
+    private SpriteRenderer sprite;
+
+    private IEnumerator Start()
+    {
+        Color c = sprite.color;
+        c.a = 0.5f;
+        sprite.color = c;
+        checkForEnemy = false;
+        yield return new WaitForSeconds(startdelay);
+        checkForEnemy = true;
+        c.a = 1f;
+        sprite.color = c;
+    }
+
+
     void Update()
     {
         if (checkForEnemy)

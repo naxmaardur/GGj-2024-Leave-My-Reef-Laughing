@@ -30,10 +30,12 @@ public class InteractionEffect : ScriptableObject
         Collider2D[] npcs = Physics2D.OverlapCircleAll(interactable.transform.position, range, LayerMask.GetMask("NPC"));
         foreach (Collider2D collider in npcs)
         {
-            if(collider.transform == interactable.transform.parent) { continue; }
             EnemyBehaviour npcControler = collider.GetComponent<EnemyBehaviour>();
-            float a = funnyValue;
-            Interactable inter = interactable;
+            if (collider.transform == interactable.transform.root) {
+                npcControler.TryAddFunny(0);
+                continue; 
+            }
+
             npcControler.TrySeeFunny(funnyValue, interactable.transform.position);
         }
     }

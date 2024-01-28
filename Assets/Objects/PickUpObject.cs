@@ -79,6 +79,7 @@ public class PickUpObject : MonoBehaviour, IPickUpAble
     public void UseInteraction(Interactable interactable)
     {
         LetGo();
+        if (!CheckInteractionCompatibility(interactable)) { return; }
         interactable.InteractionEffect.TriggerEffect(this, interactable);
     }
 

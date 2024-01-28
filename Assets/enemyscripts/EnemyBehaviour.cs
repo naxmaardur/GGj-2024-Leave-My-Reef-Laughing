@@ -4,6 +4,7 @@ using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBehaviour : MonoBehaviour
@@ -29,24 +30,85 @@ public class EnemyBehaviour : MonoBehaviour
 
     private float timerInRange = 0f;
 
-    private float targetTimeInRange = 1.5f;
+    private float targetTimeInRange = 0.75f;
 
-    public  STATES currentState = STATES.idel;
-    
+    public STATES currentState = STATES.idel;
+
+
+    [SerializeField]
+    private GameObject[] EnemyModels;
+    [SerializeField]
+    private GameObject[] HandBones;
+    [SerializeField]
+    private GameObject Net;
+    private int currentModel;
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private bool hasFlipers;
+    [SerializeField]
+    private bool hasMask;
+
+    [SerializeField]
+    private GameObject[] flippers;
+    [SerializeField]
+    private GameObject[] masks;
+
+    [SerializeField]
+    private GameObject faceInteractable;
+    [SerializeField]
+    private GameObject FeetInteractable;
+    [SerializeField]
+    private ParticleSystem LaughParticle;
+
+    [SerializeField]
+    private AudioClip[] laughs;
+
+    private AudioSource source;
+    bool canChase = true;
 
 
 
     void Start()
     {
-		fov = GetComponentInChildren<FieldOfView>();
+        transform.parent = null;
+        source = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        fov = GetComponentInChildren<FieldOfView>();
         agent = GetComponent<NavMeshAgent>();
         fishAttributes = FindObjectOfType<FishAttributes>();
+        SetEnemyModel(3);
+
+        if (hasFlipers)
+        {
+            foreach (GameObject g in flippers)
+            {
+                g.SetActive(true);
+            }
+            FeetInteractable.SetActive(false);
+        }
+        if (hasMask)
+        {
+            foreach (GameObject g in masks)
+            {
+                g.SetActive(true);
+            }
+            faceInteractable.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if(currentState == STATES.Dead)
+        animator.SetFloat("Velocity", agent.velocity.magnitude);
+        animator.speed = Mathf.Lerp(1, 3, agent.velocity.magnitude / normalSpeed);
+        if (currentState == STATES.Dead)
         {
+            if (Vector3.Distance(transform.position, agent.destination) < 0.5f)
+            {
+                GameManager.Instance.DiverExit();
+                Destroy(gameObject);
+            }
             return;
         }
         if (currentOxygen <= 0)
@@ -54,25 +116,45 @@ public class EnemyBehaviour : MonoBehaviour
             //go to the upmost top
             currentState = STATES.Dead;
             agent.SetDestination(GameManager.Instance.NpcDeathPoint);
+            SetEnemyModel(0);
             return;
         }
 
-        if(!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime)
+        switch (currentModel)
+        {
+            case 3:
+                if (currentOxygen < 75)
+                {
+                    SetEnemyModel(2);
+                }
+                break;
+            case 2:
+                if (currentOxygen < 50)
+                {
+                    SetEnemyModel(1);
+                }
+                break;
+        }
+
+
+        if (!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime && canChase)
         {
             continueChase = true;
         }
-        if(continueChase && fishAttributes.TimeOutsideOfTunnel <= 0)
+        if (continueChase && fishAttributes.TimeOutsideOfTunnel <= 0)
         {
             continueChase = false;
         }
 
-        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel)
+        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel && !agent.isStopped && canChase)
         {
             currentState = STATES.Chase;
+            Net.SetActive(true);
         }
-        if(currentState == STATES.Chase && fishAttributes.isInTunnel)
+        if (currentState == STATES.Chase && fishAttributes.isInTunnel)
         {
             StartMoveToRoom();
+            Net.SetActive(false);
             currentState = STATES.move;
         }
 
@@ -120,7 +202,7 @@ public class EnemyBehaviour : MonoBehaviour
         MakeADescicion(choice);
         timerChoice = 0;
         //generate a random time 
-        targetTimeChoice = Random.Range(0f, 2f);
+        targetTimeChoice = Random.Range(0f, 7f);
         currentState = STATES.move;
     }
 
@@ -142,13 +224,13 @@ public class EnemyBehaviour : MonoBehaviour
         agent.speed = normalSpeed;
         agent.SetDestination(fishAttributes.transform.position);
 
-        if(Vector3.Distance(transform.position, agent.destination) < 0.5f)
+        if (Vector3.Distance(transform.position, agent.destination) < 2f)
         {
-            if(timerInRange < targetTimeInRange)
+            if (timerInRange < targetTimeInRange)
             {
                 timerInRange += Time.deltaTime;
 
-                if(timerInRange >= targetTimeInRange)
+                if (timerInRange >= targetTimeInRange)
                 {
                     Attack();
                 }
@@ -156,7 +238,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else
         {
-            if(timerInRange > 0)
+            if (timerInRange > 0)
             {
                 timerInRange -= Time.deltaTime;
             }
@@ -167,7 +249,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         timerInRange = 0;
         fishAttributes.takeDamage();
-        StartCoroutine(PauseForTime(1));
+        animator.SetTrigger("Swing");
+        StartCoroutine(PauseForTime(2.5f));
     }
 
     IEnumerator PauseForTime(float time)
@@ -175,6 +258,12 @@ public class EnemyBehaviour : MonoBehaviour
         agent.isStopped = true;
         yield return new WaitForSeconds(time);
         agent.isStopped = false;
+    }
+    IEnumerator PauseChase(float time)
+    {
+        canChase = false;
+        yield return new WaitForSeconds(time);
+        canChase = true;
     }
 
     void MoveToRoom(Room room)
@@ -187,14 +276,29 @@ public class EnemyBehaviour : MonoBehaviour
         currentroom = room;
     }
 
+    [Button]
+    public void test()
+    {
+        TryAddFunny(25);
+    }
+
     public void TryAddFunny(float f)
     {
         if (currentState == STATES.Dead)
         {
             return;
         }
+        if (f > 1)
+        {
+            LaughParticle.Play();
+            source.PlayOneShot(laughs[Random.Range(0, laughs.Length)]);
+            StartCoroutine(PauseChase(7));
+            Net.SetActive(false);
+        }
         currentOxygen -= f;
-        StartCoroutine(PauseForTime(1));
+        currentState = STATES.idel;
+        StartCoroutine(PauseForTime(2));
+        
     }
 
     public void TrySeeFunny(float f, Vector3 position)
@@ -246,6 +350,18 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
 
         }
+    }
+
+
+    private void SetEnemyModel(int i)
+    {
+        foreach (GameObject g in EnemyModels)
+        {
+            g.SetActive(false);
+        }
+        EnemyModels[i].SetActive(true);
+        Net.transform.parent = HandBones[i].transform;
+        currentModel = i;
     }
 
 
