@@ -475,7 +475,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactable: {fileID: 7938960763779123340}
   PickupTrap: {fileID: 0}
-  range: 5
+  range: 2
+  startdelay: 3
+  sprite: {fileID: 5168904855301325630}
 --- !u!114 &7938960763779123340
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,12 @@ public class PlayerObjectMaster : MonoBehaviour
         CheckForObjects();
         CheckForInteractables();
 
+        if(fishAttributes.isInTunnel && currentObject != null)
+        {
+            currentObject.LetGo();
+            currentObject = null;
+        }
+
         if (PlayerInputHandler.Instance.UsePressed)
         {
             TriggerUse();
