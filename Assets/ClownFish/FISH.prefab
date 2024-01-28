@@ -5419,6 +5419,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   boxCollider: {fileID: 4180391568683317083}
+  interactionRange: 0.6
 --- !u!58 &7096932976950651967
 CircleCollider2D:
   m_ObjectHideFlags: 0
