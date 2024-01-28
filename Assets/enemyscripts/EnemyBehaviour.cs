@@ -59,7 +59,8 @@ public class EnemyBehaviour : MonoBehaviour
     private GameObject faceInteractable;
     [SerializeField]
     private GameObject FeetInteractable;
-
+    [SerializeField]
+    private ParticleSystem LaughParticle;
 
 
 
@@ -267,9 +268,13 @@ public class EnemyBehaviour : MonoBehaviour
         {
             return;
         }
+        if(f > 1)
+        {
+            LaughParticle.Play();
+        }
         currentOxygen -= f;
         currentState = STATES.idel;
-        StartCoroutine(PauseForTime(1));
+        StartCoroutine(PauseForTime(2));
     }
 
     public void TrySeeFunny(float f, Vector3 position)
