@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WhoopeeTrap
   m_EditorClassIdentifier: 
   effectDuration: 1.34
-  funnyValue: 35
+  funnyValue: 5
   range: 10
   effectVisuals: {fileID: 0}
   AnimationTrigger: Activate

@@ -8,6 +8,7 @@ public class GameOverCanvas : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button restartWinButton;
     [SerializeField] private TextMeshProUGUI diverCountText;
 
     [SerializeField] private int diverCount = 6;
@@ -18,6 +19,7 @@ public class GameOverCanvas : MonoBehaviour
         GameManager.Instance.gameOverEvent.AddListener(EnableGameOverScreen);
         GameManager.Instance.diverExitEvent.AddListener(UpdateDiverCount);
         restartButton.onClick.AddListener(Restart);
+        restartWinButton.onClick.AddListener(Restart);
     }
 
     // Update is called once per frame

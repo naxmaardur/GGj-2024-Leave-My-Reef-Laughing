@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Feather
   m_EditorClassIdentifier: 
   effectDuration: 0
-  funnyValue: 5
+  funnyValue: 15
   range: 0
   effectVisuals: {fileID: 0}

@@ -22,6 +22,8 @@ public class PlayerObjectMaster : MonoBehaviour
     BoxCollider2D boxCollider;
 
     FishAttributes fishAttributes;
+    [SerializeField]
+    float interactionRange;
 
 
 
@@ -107,7 +109,7 @@ public class PlayerObjectMaster : MonoBehaviour
             pickUpAbleTarget = null;
             return;
         }
-        Collider2D[] pickUps = Physics2D.OverlapCircleAll(pickUpPoint.position, 0.3f, pickUpLayer);
+        Collider2D[] pickUps = Physics2D.OverlapCircleAll(pickUpPoint.position, interactionRange, pickUpLayer);
 
         Collider2D pickUp = null;
         float dist = Mathf.Infinity;
@@ -145,7 +147,7 @@ public class PlayerObjectMaster : MonoBehaviour
 
     private void CheckForInteractables()
     {
-        Collider2D[] interactables = Physics2D.OverlapCircleAll(pickUpPoint.position, 0.3f, interactableLayer);
+        Collider2D[] interactables = Physics2D.OverlapCircleAll(pickUpPoint.position, interactionRange, interactableLayer);
 
         Collider2D interactable = null;
         float dist = Mathf.Infinity;

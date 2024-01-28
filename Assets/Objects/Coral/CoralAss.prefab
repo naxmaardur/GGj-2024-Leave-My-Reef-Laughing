@@ -5201,7 +5201,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.41
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9883,7 +9883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42fbaf01fc131e4c83a8a76f624c692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
+  cooldown: 4
   highlight: {fileID: 7445093918835177158}
   InteractionEffect: {fileID: 11400000, guid: 23bf219bfe567944188d0175e6717147, type: 2}
 --- !u!82 &4340337615295183926

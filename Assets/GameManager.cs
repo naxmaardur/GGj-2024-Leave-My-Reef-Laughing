@@ -9,6 +9,9 @@ public class GameManager : Singleton<GameManager>
 {
     public UnityEvent gameOverEvent;
     public UnityEvent diverExitEvent;
+
+    public bool OneEnemyActive;
+
     public Vector3 NpcDeathPoint = Vector3.zero;
 
     // Start is called before the first frame update

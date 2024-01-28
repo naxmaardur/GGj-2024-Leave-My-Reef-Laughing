@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42fbaf01fc131e4c83a8a76f624c692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
+  cooldown: 4
   highlight: {fileID: 8424928445498399484}
   InteractionEffect: {fileID: 11400000, guid: 7d55f1c911664be4589dce9f00818390, type: 2}
 --- !u!95 &2015379149025678374

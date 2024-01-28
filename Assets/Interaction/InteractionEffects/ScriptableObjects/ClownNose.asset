@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ClownNose
   m_EditorClassIdentifier: 
   effectDuration: 2
-  funnyValue: 15
+  funnyValue: 5
   range: 15
   effectVisuals: {fileID: 0}
   AnimationTrigger: Clown

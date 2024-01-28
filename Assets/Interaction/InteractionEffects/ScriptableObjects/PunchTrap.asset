@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PunchTrap
   m_EditorClassIdentifier: 
   effectDuration: 2.67
-  funnyValue: 25
+  funnyValue: 5
   range: 10
   effectVisuals: {fileID: 0}
   AnimationTrigger: Open
