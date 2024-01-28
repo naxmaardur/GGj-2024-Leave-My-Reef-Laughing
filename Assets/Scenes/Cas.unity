@@ -249,7 +249,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -765,7 +765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -943,7 +943,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -1036,7 +1036,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -1129,7 +1129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -3058,7 +3058,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -11683,7 +11683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -26454,7 +26454,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -29727,7 +29727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -30533,7 +30533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -30878,7 +30878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -36281,7 +36281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -41200,7 +41200,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -46225,7 +46225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -46904,7 +46904,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -47174,7 +47174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -52543,7 +52543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
@@ -53081,7 +53081,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -53174,7 +53174,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasMask
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
@@ -53524,7 +53524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: hasFlipers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262114347519010816, guid: d2f606701952d8b4da31786243100648, type: 3}
       propertyPath: currentroom
