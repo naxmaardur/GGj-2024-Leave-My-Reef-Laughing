@@ -62,10 +62,16 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     private ParticleSystem LaughParticle;
 
+    [SerializeField]
+    private AudioClip[] laughs;
+
+    private AudioSource source;
+
 
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 		fov = GetComponentInChildren<FieldOfView>();
         agent = GetComponent<NavMeshAgent>();
@@ -271,6 +277,7 @@ public class EnemyBehaviour : MonoBehaviour
         if(f > 1)
         {
             LaughParticle.Play();
+            source.PlayOneShot(laughs[Random.Range(0, laughs.Length)]);
         }
         currentOxygen -= f;
         currentState = STATES.idel;
