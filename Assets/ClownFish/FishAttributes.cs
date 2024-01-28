@@ -48,7 +48,7 @@ public class FishAttributes : MonoBehaviour
         }
         if(isInTunnel && TimeOutsideOfTunnel > 0)
         {
-            TimeOutsideOfTunnel -= Time.deltaTime * 2;
+            TimeOutsideOfTunnel -= Time.deltaTime * 4;
         }
     }
 

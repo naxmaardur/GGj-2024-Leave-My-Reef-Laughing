@@ -75,6 +75,9 @@ public class PlayerObjectMaster : MonoBehaviour
             if (!interactableTarget.IsInteractable()) { return; }
             currentObject.UseInteraction(interactableTarget);
             PlayerInputHandler.Instance.ActionUseUsed();
+            currentObject = null;
+            boxCollider.enabled = false;
+            return;
         }
         if (currentObject.IsPlacable())
         {

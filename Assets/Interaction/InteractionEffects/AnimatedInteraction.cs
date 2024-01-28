@@ -15,7 +15,7 @@ public class AnimatedInteraction : InteractionEffect
         }
         interactable.Interacted();
 
-        Animator animator = interactable.GetComponentInParent<Animator>();
+        Animator animator = interactable.transform.root.GetComponent<Animator>();
         if(animator == null)
         {
             animator = interactable.GetComponent<Animator>();
