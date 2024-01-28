@@ -146,7 +146,7 @@ public class EnemyBehaviour : MonoBehaviour
             continueChase = false;
         }
 
-        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel && !agent.isStopped && canChase)
+        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel && !agent.isStopped && canChase && (Vector3.Distance(transform.position, fishAttributes.transform.position) <= fov.viewRadius) && (!Physics2D.Linecast(transform.position, fishAttributes.transform.position, LayerMask.GetMask("Wall"))) && (fov.CheckForObjectBetweenAngle(fishAttributes.transform.position)))
         {
             currentState = STATES.Chase;
             Net.SetActive(true);
