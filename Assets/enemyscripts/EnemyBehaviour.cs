@@ -30,7 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private float timerInRange = 0f;
 
-    private float targetTimeInRange = 1.5f;
+    private float targetTimeInRange = 0.75f;
 
     public STATES currentState = STATES.idel;
 
@@ -223,7 +223,7 @@ public class EnemyBehaviour : MonoBehaviour
         agent.speed = normalSpeed;
         agent.SetDestination(fishAttributes.transform.position);
 
-        if (Vector3.Distance(transform.position, agent.destination) < 0.5f)
+        if (Vector3.Distance(transform.position, agent.destination) < 2f)
         {
             if (timerInRange < targetTimeInRange)
             {
