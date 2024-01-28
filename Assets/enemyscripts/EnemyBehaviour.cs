@@ -262,7 +262,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         canChase = false;
         yield return new WaitForSeconds(time);
-        canChase = false;
+        canChase = true;
     }
 
     void MoveToRoom(Room room)
