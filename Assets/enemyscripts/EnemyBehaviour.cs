@@ -72,6 +72,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Start()
     {
+        transform.parent = null;
         source = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         fov = GetComponentInChildren<FieldOfView>();
