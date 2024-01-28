@@ -32,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private float targetTimeInRange = 1.5f;
 
-    public  STATES currentState = STATES.idel;
+    public STATES currentState = STATES.idel;
 
 
     [SerializeField]
@@ -66,6 +66,7 @@ public class EnemyBehaviour : MonoBehaviour
     private AudioClip[] laughs;
 
     private AudioSource source;
+    bool canChase = true;
 
 
 
@@ -73,13 +74,14 @@ public class EnemyBehaviour : MonoBehaviour
     {
         source = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-		fov = GetComponentInChildren<FieldOfView>();
+        fov = GetComponentInChildren<FieldOfView>();
         agent = GetComponent<NavMeshAgent>();
         fishAttributes = FindObjectOfType<FishAttributes>();
         SetEnemyModel(3);
+
         if (hasFlipers)
         {
-            foreach(GameObject g in flippers)
+            foreach (GameObject g in flippers)
             {
                 g.SetActive(true);
             }
@@ -87,7 +89,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         if (hasMask)
         {
-            foreach(GameObject g in masks)
+            foreach (GameObject g in masks)
             {
                 g.SetActive(true);
             }
@@ -99,8 +101,13 @@ public class EnemyBehaviour : MonoBehaviour
     {
         animator.SetFloat("Velocity", agent.velocity.magnitude);
         animator.speed = Mathf.Lerp(1, 3, agent.velocity.magnitude / normalSpeed);
-        if(currentState == STATES.Dead)
+        if (currentState == STATES.Dead)
         {
+            if (Vector3.Distance(transform.position, agent.destination) < 0.5f)
+            {
+                GameManager.Instance.DiverExit();
+                Destroy(gameObject);
+            }
             return;
         }
         if (currentOxygen <= 0)
@@ -115,7 +122,7 @@ public class EnemyBehaviour : MonoBehaviour
         switch (currentModel)
         {
             case 3:
-                if(currentOxygen < 75)
+                if (currentOxygen < 75)
                 {
                     SetEnemyModel(2);
                 }
@@ -127,23 +134,23 @@ public class EnemyBehaviour : MonoBehaviour
                 }
                 break;
         }
-        
 
-        if(!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime)
+
+        if (!fishAttributes.isInTunnel && fishAttributes.TimeOutsideOfTunnel > fishAttributes.chaseTime && canChase)
         {
             continueChase = true;
         }
-        if(continueChase && fishAttributes.TimeOutsideOfTunnel <= 0)
+        if (continueChase && fishAttributes.TimeOutsideOfTunnel <= 0)
         {
             continueChase = false;
         }
 
-        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel && !agent.isStopped)
+        if (continueChase && currentState != STATES.Dead && !fishAttributes.isInTunnel && !agent.isStopped && canChase)
         {
             currentState = STATES.Chase;
             Net.SetActive(true);
         }
-        if(currentState == STATES.Chase && fishAttributes.isInTunnel)
+        if (currentState == STATES.Chase && fishAttributes.isInTunnel)
         {
             StartMoveToRoom();
             Net.SetActive(false);
@@ -216,13 +223,13 @@ public class EnemyBehaviour : MonoBehaviour
         agent.speed = normalSpeed;
         agent.SetDestination(fishAttributes.transform.position);
 
-        if(Vector3.Distance(transform.position, agent.destination) < 0.5f)
+        if (Vector3.Distance(transform.position, agent.destination) < 0.5f)
         {
-            if(timerInRange < targetTimeInRange)
+            if (timerInRange < targetTimeInRange)
             {
                 timerInRange += Time.deltaTime;
 
-                if(timerInRange >= targetTimeInRange)
+                if (timerInRange >= targetTimeInRange)
                 {
                     Attack();
                 }
@@ -230,7 +237,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else
         {
-            if(timerInRange > 0)
+            if (timerInRange > 0)
             {
                 timerInRange -= Time.deltaTime;
             }
@@ -250,6 +257,12 @@ public class EnemyBehaviour : MonoBehaviour
         agent.isStopped = true;
         yield return new WaitForSeconds(time);
         agent.isStopped = false;
+    }
+    IEnumerator PauseChase(float time)
+    {
+        canChase = false;
+        yield return new WaitForSeconds(time);
+        canChase = false;
     }
 
     void MoveToRoom(Room room)
@@ -274,14 +287,17 @@ public class EnemyBehaviour : MonoBehaviour
         {
             return;
         }
-        if(f > 1)
+        if (f > 1)
         {
             LaughParticle.Play();
             source.PlayOneShot(laughs[Random.Range(0, laughs.Length)]);
+            StartCoroutine(PauseChase(7));
+            Net.SetActive(false);
         }
         currentOxygen -= f;
         currentState = STATES.idel;
         StartCoroutine(PauseForTime(2));
+        
     }
 
     public void TrySeeFunny(float f, Vector3 position)
@@ -338,7 +354,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void SetEnemyModel(int i)
     {
-        foreach(GameObject g in EnemyModels)
+        foreach (GameObject g in EnemyModels)
         {
             g.SetActive(false);
         }
