@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaveManager : MonoBehaviour
 {
@@ -36,6 +37,12 @@ public class WaveManager : MonoBehaviour
             enemiesToSpawn.Remove(enemiesToSpawn[0]);
             timer = 0;
         }
+
+        if (activeEnemies - amountOfEnemiesLeft == 1)
+        {
+            if (!GameManager.Instance.OneEnemyActive) {}GameManager.Instance.OneEnemyActive = true;
+        }
+        else if (GameManager.Instance.OneEnemyActive) GameManager.Instance.OneEnemyActive = false;
     }
 
     public void EnemyLeft()
